@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>购物车</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        ul li {
+            list-style: none;
+        }
+
+        ul {
+            list-style: none;
+            position: relative;
+        }
+
+        ul li {
+            height: 5rem;
+            width: 100%;
+            border: 1px solid #ababab;
+            padding: 0.5rem 0;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: center;
+        }
+
+        .goods-pic {
+            height: 100%;
+            width: 30%;
+            margin-right: 0.5rem;
+        }
+
+        .goods-pic img {
+            height: 100%;
+            width: 100%;
+        }
+
+        .goods-txt {
+            height: 100%;
+            width: 60%;
+            position: relative;
+        }
+
+        .goods-txt p:nth-child(1) {
+            font: 0.8rem/1rem "微软雅黑";
+        }
+
+        .goods-txt p:nth-child(2) b {
+            font: 1rem/1rem "微软雅黑";
+            color: #f42a76;
+            font-weight: 0;
+            margin-right: 0.5rem;
+        }
+
+        .goods-txt p:nth-child(2) span {
+            font: 0.7rem/1rem "微软雅黑";
+            color: #cac8c9;
+            text-decoration: line-through;
+        }
+
+        .goods-txt p:nth-child(3) {
+            font: 0.8rem/1rem "微软雅黑";
+        }
+
+        .goods-txt a {
+            display: block;
+            height: 1.6rem;
+            width: 4rem;
+            background: url(img/index-cat.png) no-repeat left top;
+            background-size: contain;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <table id="tab">
+        <tr>
+            <td>
+                <span>苹果：</span>
+                <span class="price">1.50</span>
+                <input type="button" value="-" class="min">
+                <input type="text" class="text_box" value="1">
+                <input type="button" value="+" class="add">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span>香蕉：</span>
+                <span class="price">4.50</span>
+                <input type="button" value="-" class="min">
+                <input type="text" class="text_box" value="1">
+                <input type="button" value="+" class="add">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span>桃子：</span>
+                <span class="price">6.50</span>
+                <input type="button" value="-" class="min">
+                <input type="text" class="text_box" value="1">
+                <input type="button" value="+" class="add">
+            </td>
+        </tr>
+    </table>
+    <p>总价：
+        <label id="total"></label>
+    </p>
+    <ul>
+
+    </ul>
+
+    <script src="jquery-2.1.0.js"></script>
+    <script>
+        $(function () {
+            function setTotal() {
+                var s = 0;
+                $('#tab  td').each(function () {
+                    s += parseInt($(this).find('input[class*=text_box]').val()) * parseFloat($(this).find(
+                        'span[class*=price]').text());
+                });
+                $('#total').html(s.toFixed(2));
+            }
+            setTotal();
+            $('.add').click(function () {
+                var t = $(this).parent().find('input[class*=text_box]');
+                t.val(parseInt(t.val()) + 1);
+                setTotal();
+            });
+            $('.min').click(function () {
+                var t = $(this).parent().find('input[class*=text_box]');
+                t.val(parseInt(t.val()) - 1);
+                if (parseInt(t.val()) < 0) {
+                    t.val(0);
+                }
+                setTotal();
+            });
+            var baseUrl = "http://datainfo.duapp.com/shopdata/getGoods.php";
+            var goodListStr = "";
+            $.ajax({
+                type: "GET",
+                url: baseUrl,
+                data: goodListStr,
+                dataType: "jsonp",
+                success: function (data) {
+                    var html = "";
+                    for (var i = 0; i < data.length; i++) {
+                        html += "<li><div class='goods-pic'><img src=' " + data[i].goodsListImg +
+                            " '/></div><div class='goods-txt'><p>" + data[i].goodsName +
+                            "</p><p><b>￥" + data[i].price + "</b><span>￥28880</span></p><p>" + data[
+                                i].discount + " 折</p><a href='#'></a></div></li>"
+                    }
+                    $('ul').append(html);
+
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("XMLHttpRequest : " + XMLHttpRequest);
+                    console.log("textStatus : " + textStatus);
+                    console.log("errorThrown : " + errorThrown);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
