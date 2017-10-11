@@ -5,8 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>练习</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        header,footer{
+            text-align: center;
+            line-height: 45px;
+            width: 100%;
+        }
+        header{
+            position: fixed;
+            top: 0;
+        }
+        footer{
+            border: 1px solid red;
+            position: fixed;
+            bottom: 0;
+        }
+        section{
+            position: absolute;
+            top: 45px;
+            bottom: 45px;
+        }
+        header input{
+            outline:none; 
+            height: 30px;
+            border: 1px solid gray;
+            border-radius: 5px;
+            font-size: 18px;
+            padding-left: 4px;
+        }
+    </style>
 </head>
 <body>
-    <div><p>七侠五义之包青天</p></div>
+    <header><input type="text" placeholder="搜索"></header>
+    <section>内容</section>
+    <footer>底部</footer>
 </body>
 </html>
