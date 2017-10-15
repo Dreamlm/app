@@ -20,7 +20,7 @@
             msg = arr.join("");
             return msg;
         }
-        //alert(combo('get-element-by-id'));
+        console.log(combo('get-element-by-id'));
 
 
         //用js实现随机选取10–100之间的10个数字，存入一个数组，并排序。
@@ -34,9 +34,9 @@
             iArray.push(getRandom(10, 100));
         }
         iArray.sort();
-        //alert(iArray);
+        console.log(iArray);
 
-        //有这样一个URL：http://item.taobao.com/item.htm?a=1&b=2&c=&d=xxx&e，请写一段JS程序提取URL中的各个GET参数(参数名和参数个数不确定)，将其按key-value形式返回到一个json结构中，如{a:’1′, b:’2′, c:”, d:’xxx’, e:undefined}。
+        //有这样一个URL：http://item.taobao.com/item.htm?a=1&b=2&c=3&d=xxx&e=123，请写一段JS程序提取URL中的各个GET参数(参数名和参数个数不确定)，将其按key-value形式返回到一个json结构中，如{a:’1′, b:’2′, c:”, d:’xxx’, e:undefined}。
 
         function serilizeUrl(url) {
             var result = {};
@@ -47,9 +47,9 @@
             }
             return result;
         }
-        var url = 'http: //item.taobao.com/item.htm?a=1&b=2&c=&d=xxx&e';
+        var url = 'http: //item.taobao.com/item.htm?a=1&b=2&c=3&d=xxx&e=123';
         var data = serilizeUrl(url);
-        console.log(data.a);
+        console.log(data);
     </script>
 </body>
 
