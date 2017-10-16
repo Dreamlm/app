@@ -251,15 +251,19 @@
             }
         }
     }
-    slide({
-        container: "#container", next: function (e) {
-            //松手之后执行逻辑,ajax请求数据，数据返回后隐藏加载中提示
-            var that = this;
-            setTimeout(function () {
-                that.back.call(); 
-            }, 2000);
-        }
+    $(function(){
+        slide({
+            container: "#container", next: function (e) {
+                //松手之后执行逻辑,ajax请求数据，数据返回后隐藏加载中提示
+                alert('11');
+                var that = this;
+                setTimeout(function () {
+                    that.back.call(); 
+                }, 2000);
+            }
+        });
     });
+    
 </script>
 
 </html>
